@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# configparser和ConfigParser在python中用来读取ini类型的配置文件的，提供很多方便的API来使用。
 import configparser
 cf = configparser.ConfigParser()
 
