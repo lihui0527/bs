@@ -85,15 +85,7 @@ DATABASES = {
         'HOST':'39.101.216.6',
         'PORT':'3306',
     }
-# 'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME':'training_system',
-#         'USER':'root',
-#         'PASSWORD':'12345678',
-#         'HOST':'127.0.0.1',
-#         'PORT':'3306',
-#     }
-}
+
 
 
 # Password validation
