@@ -46,10 +46,6 @@ regressor.fit(X_train,y_train)
 joblib.dump(regressor, "./logistic_regression1.m")
 y_pred=regressor.predict(X_test)
 
-#支持向量机
-# svm=SVC(kernel="rbf",random_state=0)
-# svm.fit(x_train,y_train)
-# y_pred=svm.predict(x_test)
 
 #混淆矩阵
 cm=confusion_matrix(y_test,y_pred)
