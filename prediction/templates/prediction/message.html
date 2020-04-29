@@ -1,0 +1,96 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}考研预测分析系统-预测{% endblock %}
+{% block user_head_img %}
+    {% if user_name %}
+        {% static 'images/user_head/timg.jpg' %}
+    {% else %}
+        {% static 'images/user_head/timg.jpg' %}
+    {% endif %}
+{% endblock %}
+{% block head_pic_url %}{{ user_head_img }}{% endblock %}
+{% block user_name %}{{ user_name }}{% endblock %}{% block body %}
+<div class="container">
+<hr class="col-md-12 column">
+    <h3>
+        <span style="color: red;">&nbsp;|&nbsp;用户预测记录</span>{{ h3 }}
+    </h3>
+    <div class="{{ class }}">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4>
+            {{ title }}
+        </h4>
+        <strong>{{ mes }}</strong>
+    </div>
+    <table class="table">
+            <thead>
+                <tr>
+
+                     <th>
+                        概率
+                    </th>
+                    <th>
+                        Result
+                    </th>
+                     <th>
+                        数据提交时间
+                    </th>
+                    <th>评价</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for data in user_data %}
+                <tr>
+                    <td>
+
+                       {% if data.result >= 0.8  %}
+
+                           <span style="color:green;">可能买</span>
+                        {% else %}
+                            <span style="color:red;">不买</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ data.result }}
+                    </td>
+                    <td>
+                        {{ data.post_time }}
+                    </td>
+                <td>{{ data.verdict }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    <table class="table">
+                 <tr>
+
+                     <th>
+                        评价次数
+                    </th>
+                    <th>
+                        Result(可能买次数)
+                    </th>
+
+                </tr>
+                <tr>
+
+                     <th>
+                        {{ k }}
+                    </th>
+                    <th>
+                       {{ k1 }}
+                    </th>
+
+                </tr>
+
+    </table>
+
+<hr>
+{% if len %}
+    <span style="float: right;">共<strong style="color:green;">{{ len}}</strong>条数据</span>
+{% endif %}
+{% if data_len %}
+    <span style="float: right;">共<strong style="color:green;">{{ data_len}}</strong>条数据</span>
+{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,233 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}卖电脑-顾客购买力预测分析{% endblock %}
+{% block user_head_img %}
+    {% if user_name %}
+        {% static 'images/user_head/timg.jpg' %}
+    {% else %}
+        {% static 'images/user_head/timg.jpg' %}
+    {% endif %}
+{% endblock %}
+{% block head_pic_url %}{{ user_head_img }}{% endblock %}
+{% block user_name %}{{ user_name }}{% endblock %}
+{% block body %}
+    <form>
+<table style="border-collapse:separate; border-spacing:15px;" class="table">
+    <h3>用户信息</h3>
+        <tr>
+            <td>
+                用户名
+           </td>
+            <td>
+                用户id
+           </td>
+            <td>
+                注册时间
+            </td>
+
+            <td>操作</td>
+        </tr>
+        {% for data in user1 %}
+            <tr>
+                <td>{{ data.name }}</td>
+                <td>{{ data.id }}</td>
+                <td>{{ data.register_time }}</td>
+
+            <td>
+                <a  href="/prediction/scn/?name={{ data.name }}">删除</a>
+                <a  href="/prediction/xx/?id={{ data.id }}">查看详细信息</a>
+            </td>
+            </tr>
+        {% endfor %}
+{% if len1 %}
+    <span style="float: right;">共<strong style="color:green;">{{ len1 }}</strong>个用户</span>
+{% endif %}
+
+</table>
+    </form>
+
+    <form class="form-horizontal" role="form" method="post" action="/prediction/s">
+    <table class="">
+        <h3>搜索时间</h3>
+    <tr>
+
+        <td>开始时间：</td>
+         <td>
+              <select id="" class="selectpicker" name="year">
+                    <option value="2018">2018年</option>
+                    <option value="2019">2019年</option>
+                </select>
+         </td>
+        <td>
+            <select id="" class="selectpicker" name="month">
+                    <option value="1">1月</option>
+                    <option value="2">2月</option>
+                    <option value="3">3月</option>
+                    <option value="4">4月</option>
+                    <option value="5">5月</option>
+                    <option value="6">6月</option>
+                    <option value="7">7月</option>
+                    <option value="8">8月</option>
+                    <option value="9">9月</option>
+                    <option value="10">10月</option>
+                    <option value="11">11月</option>
+                    <option value="12">12月</option>
+                </select>
+         </td>
+        <td>
+             <select id="" class="selectpicker" name="day">
+                    <option value="1">1号</option>
+                    <option value="2">2号</option>
+                    <option value="3">3号</option>
+                    <option value="4">4号</option>
+                    <option value="5">5号</option>
+                    <option value="6">6号</option>
+                    <option value="7">7号</option>
+                    <option value="8">8号</option>
+                    <option value="9">9号</option>
+                    <option value="10">10号</option>
+                    <option value="11">11号</option>
+                    <option value="12">12号</option>
+                    <option value="13">13号</option>
+                    <option value="14">14号</option>
+                    <option value="15">15号</option>
+                    <option value="16">16号</option>
+                    <option value="17">17号</option>
+                    <option value="18">18号</option>
+                    <option value="19">19号</option>
+                    <option value="20">20号</option>
+                    <option value="21">21号</option>
+                    <option value="22">22号</option>
+                    <option value="23">23号</option>
+                    <option value="24">24号</option>
+                    <option value="25">25号</option>
+                    <option value="26">26号</option>
+                    <option value="27">27号</option>
+                    <option value="28">28号</option>
+                    <option value="29">29号</option>
+                    <option value="30">30号</option>
+                </select>
+         </td>
+    </tr>
+
+        <tr>
+            <td>终止时间：</td>
+
+         <td>
+             <select id="" class="selectpicker" name="year1">
+                    <option value="2018">2018年</option>
+                    <option value="2019">2019年</option>
+                </select>
+         </td>
+        <td>
+                <select id="" class="selectpicker" name="month1">
+                    <option value="1">1月</option>
+                    <option value="2">2月</option>
+                    <option value="3">3月</option>
+                    <option value="4">4月</option>
+                    <option value="5">5月</option>
+                    <option value="6">6月</option>
+                    <option value="7">7月</option>
+                    <option value="8">8月</option>
+                    <option value="9">9月</option>
+                    <option value="10">10月</option>
+                    <option value="11">11月</option>
+                    <option value="12">12月</option>
+                </select>
+         </td>
+        <td>
+            <select id="" class="selectpicker" name="day1">
+                    <option value="1">1号</option>
+                    <option value="2">2号</option>
+                    <option value="3">3号</option>
+                    <option value="4">4号</option>
+                    <option value="5">5号</option>
+                    <option value="6">6号</option>
+                    <option value="7">7号</option>
+                    <option value="8">8号</option>
+                    <option value="9">9号</option>
+                    <option value="10">10号</option>
+                    <option value="11">11号</option>
+                    <option value="12">12号</option>
+                    <option value="13">13号</option>
+                    <option value="14">14号</option>
+                    <option value="15">15号</option>
+                    <option value="16">16号</option>
+                    <option value="17">17号</option>
+                    <option value="18">18号</option>
+                    <option value="19">19号</option>
+                    <option value="20">20号</option>
+                    <option value="21">21号</option>
+                    <option value="22">22号</option>
+                    <option value="23">23号</option>
+                    <option value="24">24号</option>
+                    <option value="25">25号</option>
+                    <option value="26">26号</option>
+                    <option value="27">27号</option>
+                    <option value="28">28号</option>
+                    <option value="29">29号</option>
+                    <option value="30">30号</option>
+                </select>
+         </td>
+    </tr>
+        <td><input type="reset" class="btn btn-danger" style="float: left;width: 70px;height: 35px;line-height: 10px;font-size: 15px;" value="重置"/></td>
+        <td><input type="submit" class="btn btn-success" style="float: right;width: 100px;height: 35px;line-height: 10px;font-size: 15px;" value="查询"/></td>
+    </table>
+</form>
+    <form>
+
+        <table class="table">
+            <thead>
+            {% if shu  %}
+                <tr>
+                    <th>
+                    用户id
+                    </th>
+                     <th>
+                        概率
+                    </th>
+                    <th>
+                        Result
+                    </th>
+                     <th>
+                        数据提交时间
+                    </th>
+                    <th>评价</th>
+                </tr>
+            {% endif %}
+            </thead>
+            <tbody>
+            {% for data in shu %}
+                <tr>
+                <td>
+                {{  data.user_id }}
+                </td>
+                    <td>
+
+                       {% if data.result >= 0.8  %}
+
+                           <span style="color:green;">可能买</span>
+                        {% else %}
+                            <span style="color:red;">不买</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ data.result }}
+                    </td>
+                    <td>
+                        {{ data.post_time }}
+                    </td>
+                <td>{{ data.verdict }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </form>
+    {% if len %}
+        <span style="float: right;">可能买<strong style="color:green;">{{ len2}}</strong>次</span>
+    <span style="float: left;">共<strong style="color:green;">{{ len}}</strong>条数据</span>
+        {% else %}
+        <span style="color:red;">未查询到数据</span>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,199 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}卖电脑-顾客购买力预测分析{% endblock %}
+{% block user_head_img %}
+    {% if user_name %}
+        {{ user_head_img }}
+    {% else %}
+        {% static 'images/user_head/no_one.ico' %}
+    {% endif %}
+{% endblock %}
+{% block head_pic_url %}{{ user_head_img }}{% endblock %}
+{% block user_name %}{{ user_name }}{% endblock %}
+{% block body %}
+<div class="row clearfix" style="margin-top: 20px; margin-bottom: 20px; padding-top: 20px;">
+    <div class="col-md-6 column">
+        <h3>
+            <span style="color: red;"> | </span>请顾客输入与之对应的各项的数据
+        </h3>
+        <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #999999;">我们会根据顾客输入的参数使用机器学习来预测该用户的购买力情况</span>
+        </p>
+    </div>
+    <div class="col-md-6 column">
+        <h3>
+            <span style="color: red;"> | </span>部分数据分析结果展示
+        </h3>
+        <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #999999;">包含测试数据和用户输入的数据(Index：索引，Customer：顾客，Result：购买机率)</span>
+        </p>
+    </div>
+
+</div>
+
+<div class="row clearfix" style="padding-bottom: 20px;">
+		<div class="col-md-6 column">
+			<form class="form-horizontal" role="form" method="post" action="/prediction/prediction">
+
+				<div class="form-group">
+                <label for="inputEmail3" class="col-sm-5 control-label" >电脑品牌（A）：</label>
+                <div class="col-sm-7" style="float: right;">
+                <select id="col-sm-5 control-label" class="selectpicker" name="computer_name">
+                    <option value="1">联想</option>
+                    <option value="2">戴尔</option>
+                    <option value="3">惠普</option>
+                    <option value="4">苹果</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-5 control-label" >电脑尺寸（B）：</label>
+                <div class="col-sm-7" style="float: right;">
+                    <select id="col-sm-5 control-label" class="selectpicker" name="computer_size">
+                <option value="1">18寸以上</option>
+                <option value="2">15寸-17寸</option>
+                    <option value="3">12寸-14寸</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-5 control-label" >最喜欢的电脑颜色（C）：</label>
+                <div class="col-sm-7" style="float: right;">
+                    <select id="col-sm-5 control-label" class="selectpicker" name="computer_color">
+                    <option value="1">黑色</option>
+                    <option value="2">白色</option>
+                    <option value="3">银色</option>
+                    <option value="4">其他颜色</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-5 control-label" >最常用的购买渠道（D）：</label>
+                <div class="col-sm-7" style="float: right;">
+                    <select id="col-sm-5 control-label" class="selectpicker" name="order_channel">
+                    <option value="1">实体店</option>
+                    <option value="2">网站</option>
+                    <option value="3">电商</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-5 control-label" >主要用途（E）：</label>
+                <div class="col-sm-7" style="float: right;">
+                    <select id="col-sm-5 control-label" class="selectpicker" name="customer_will">
+                    <option value="1">学习</option>
+                    <option value="2">办公</option>
+                    <option value="3">游戏</option>
+                    <option value="4">其他</option>
+                </select>
+                </div>
+            </div>
+
+			<div class="form-group">
+                <label for="inputEmail3" class="col-sm-5 control-label" >在意的电脑配置（F）：</label>
+                <div class="col-sm-7" style="float: right;">
+                    <select id="col-sm-5 control-label" class="selectpicker" name="computer_configuration">
+                    <option value="1">理器内存</option>
+                    <option value="2">显卡硬盘</option>
+                    <option value="3">主板摄像头</option>
+                </select>
+                </div>
+            </div>
+
+			  <div class="form-group">
+                <label for="inputEmail3" class="col-sm-5 control-label" >购买笔记本的要素（G）：</label>
+                <div class="col-sm-7" style="float: right;">
+                    <select id="col-sm-5 control-label" class="selectpicker" name="order_factor">
+                    <option value="1">价格品牌</option>
+                    <option value="2">外观配置</option>
+                    <option value="3">散热售后</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-5 control-label" >顾客收入（H）：</label>
+                <div class="col-sm-7" style="float: right;">
+                    <input type="text" class="form-control" id="" name="customer_salary" placeholder="请输入薪水，如：一万元，则输入：1"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-5 control-label" >顾客理想交易额（I）：</label>
+                <div class="col-sm-7" style="float: right;">
+                    <input type="text" class="form-control" id="" name="customer_cost" placeholder="请输入交易额，如：一万元，则输入：1"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-5 control-label" >是否急用（J）：</label>
+                <div class="col-sm-7" style="float: right;">
+                     <select id="col-sm-5 control-label" class="selectpicker" name="urgent_need">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-7" style="margin-top: 10px;">
+                    <input type="reset" class="btn btn-danger" style="float: left;width: 70px;height: 35px;line-height: 10px;font-size: 15px;" value="重置"/>
+                </div>
+            </div>
+                <div class="col-sm-offset-2 col-sm-10" style="margin-top: -50px;">
+                <input type="submit" class="btn btn-success" style="float: right;width: 100px;height: 35px;line-height: 10px;font-size: 15px;" value="开始预测"/>
+            </div>
+
+        </form>
+
+    </div>
+<div class="col-md-6 column">
+			<div class="carousel slide" id="carousel-119622">
+				<ol class="carousel-indicators">
+					<li data-slide-to="0" data-target="#carousel-119622">
+					</li>
+					<li data-slide-to="1" data-target="#carousel-119622">
+					</li>
+					<li data-slide-to="2" data-target="#carousel-119622" class="active">
+					</li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="item">
+						<img alt="" src="{% static '/images/register/python.jpg' %}" />
+						<div class="carousel-caption">
+							<h3>
+								python
+							</h3>
+							<p>
+                                是一种广泛使用的高级编程语言，属于通用型编程语言，由吉多·范罗苏姆创造，第一版发布于1991年。
+							</p>
+						</div>
+					</div>
+					<div class="item">
+						<img alt="" src="{% static '/images/register/机器学习.jpg' %}" />
+						<div class="carousel-caption">
+							<h3>
+								机器学习
+							</h3>
+							<p>
+                                机器学习是人工智能的一个分支。人工智能的研究历史有着一条从以“推理”为重点，到以“知识”为重点，再到以“学习”为重点的自然、清晰的脉络。显然，机器学习是实现人工智能的一个途径，即以机器学习为手段解决人工智能中的问题。
+							</p>
+						</div>
+					</div>
+					<div class="item active">
+						<img alt="" src="{% static '/images/register/spark.jpg' %}" />
+						<div class="carousel-caption">
+							<h3>
+                                spark
+							</h3>
+							<p>
+                                是一个开源集群运算框架，最初是由加州大学柏克莱分校AMPLab所开发。相对于Hadoop的MapReduce会在运行完工作后将中介数据存放到磁盘中，Spark使用了存储器内运算技术，能在数据尚未写入硬盘时即在存储器内分析运算。
+							</p>
+						</div>
+					</div>
+				</div> <a class="left carousel-control" href="#carousel-119622" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-119622" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+			</div>
+		</div>
+</div>
+{% endblock %}

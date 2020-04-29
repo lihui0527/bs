@@ -1,0 +1,168 @@
+
+{% extends "index.html" %}
+{% load static %}
+{% block title %}卖电脑-顾客购买力预测分析{% endblock %}
+{% block user_head_img %}
+    {% if user_name %}
+        {{ user_head_img }}
+    {% else %}
+        {% static 'images/user_head/no_one.ico' %}
+    {% endif %}
+{% endblock %}
+{% block head_pic_url %}{{ user_head_img }}{% endblock %}
+{% block user_name %}{{ user_name }}{% endblock %}
+{% block body %}
+    <link rel="stylesheet" href="{% static './layui/css/layui.css' %}" />
+    <script type="text/javascript" src="{% static 'javascript/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'javascript/jquery1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'javascript/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'layui/layui.js' %}"></script>
+    <script type="text/javascript" src="{% static 'javascript/sys_config.js' %}"></script>
+
+<div class="row clearfix" style="margin-top: 20px; margin-bottom: 20px; padding-top: 20px;">
+    <div class="col-md-6 column">
+        <h3>
+            <span style="color: red;"> | </span>请顾客输入与之对应的各项的数据
+        </h3>
+        <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #999999;">我们会根据顾客输入的参数使用机器学习来预测该用户的购买力情况</span>
+        </p>
+    </div>
+    <div class="col-md-6 column">
+        <h3>
+            <span style="color: red;"> | </span>部分数据分析结果展示
+        </h3>
+        <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #999999;">包含测试数据和用户输入的数据(Index：索引，Customer：顾客，Result：购买机率)</span>
+        </p>
+    </div>
+</div>
+    <div class="layui-layout layui-layout-admin">
+    <div style="padding: 15px;">
+    <fieldset class="layui-elem-field">
+    <div class="layui-field-box">
+<form class="layui-form" role="form" method="post" action="/prediction/prediction" enctype="multipart/form-data">
+<div class="layui-field-box">
+      <div class="layui-form-item">
+            <div class="form-group">
+                <label for="inputEmail3" class="layui-form-label" >电脑品牌（A）：</label>
+                <div class="col-sm-7" >
+
+                        <select name="computer_name">
+                            <option name="computer_name" value="1">联想</option>
+                            <option name="computer_name" value="2">戴尔</option>
+                            <option name="computer_name" value="3">惠普</option>
+                            <option name="computer_name" value="4">苹果</option>
+                        </select>
+                </div>
+                </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="form-group">
+                <label for="inputEmail3" class="layui-form-label" >电脑尺寸（B）：</label>
+                <div class="col-sm-7" >
+                        <select name="computer_size">
+                            <option name="computer_size" value="1">18寸以上</option>
+                            <option name="computer_size" value="2">15寸-17寸</option>
+                            <option name="computer_size" value="3">12寸-14寸</option>
+                        </select>
+                </div>
+                </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="form-group">
+                <label for="inputEmail3" class="layui-form-label" >最喜欢的电脑颜色（C）：</label>
+                <div class="col-sm-7" >
+                        <select name="computer_color">
+                            <option name="computer_color" value="1">black</option>
+                            <option name="computer_color" value="2">white</option>
+                            <option name="computer_color" value="3">silver</option>
+                            <option name="computer_color" value="4">other</option>
+                        </select>
+                </div>
+                </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="form-group">
+                <label for="inputEmail3" class="layui-form-label" >最常用的购买渠道（D）：</label>
+                <div class="col-sm-7" >
+                        <select name="order_channel">
+                            <option name="order_channel" value="1">实体店</option>
+                            <option name="order_channel" value="2">网站</option>
+                            <option name="order_channel" value="3">电商</option>
+                        </select>
+                </div>
+                </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="form-group">
+                <label for="inputEmail3" class="layui-form-label" >主要用途（E）：</label>
+                <div class="col-sm-7" >
+                        <select name="customer_will">
+                            <option name="customer_will" value="1">学习</option>
+                            <option name="customer_will" value="2">办公</option>
+                            <option name="customer_will" value="3">游戏</option>
+                            <option name="customer_will" value="4">other</option>
+                        </select>
+                </div>
+                </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="form-group">
+                <label for="inputEmail3" class="layui-form-label" >在意的电脑配置（F）：</label>
+                <div class="col-sm-7" >
+                        <select name="computer_configuration">
+                            <option name="computer_configuration" value="1">处理器内存</option>
+                            <option name="computer_configuration" value="2">显卡硬盘</option>
+                            <option name="computer_configuration" value="3">主板</option>
+                            <option name="computer_configuration" value="4">主板摄像头</option>
+                        </select>
+                </div>
+                </div>
+        </div>
+        <div class="layui-form-item">
+                <label class="layui-form-label" >购买笔记本的要素（G）：</label>
+                <div class="col-sm-7" >
+                        <select name="order_factor" id="col-sm-5 control-label" class="selectpicker">
+                            <option name="order_factor" value="1">价格品牌</option>
+                            <option name="order_factor" value="2">外观配置</option>
+                        </select>
+                </div>
+                </div>
+        </div>
+        <div class="layui-form-item">
+                <label class="layui-form-label">顾客收入（H）：</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="customer_salary" required  lay-verify="required" placeholder="请输入薪水，如：一万元，则输入：1" autocomplete="off" class="form-control">
+                        </div>
+        </div>
+        <div class="layui-form-item">
+                <label class="layui-form-label">顾客理想交易额（I）：</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="customer_cost" required  lay-verify="required" placeholder="请输入交易额，如：一万元，则输入：1" autocomplete="off" class="form-control">
+                        </div>
+        </div>
+        <div class="layui-form-item">
+                <label for="inputEmail3" class="layui-form-label" >是否急用（J）：</label>
+                <div class="col-sm-7" >
+                    <select id="col-sm-5 control-label" class="selectpicker" name="urgent_need">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+                </div>
+        </div>
+        <div class="form-group">
+                <div class="col-sm-7" style="margin-top: 10px;">
+                    <input type="reset" class="btn btn-danger" style="float: left;width: 70px;height: 35px;line-height: 10px;font-size: 15px;" value="重置"/>
+                </div>
+            </div>
+                <div class="col-sm-offset-2 col-sm-10" style="margin-top: -50px;">
+                <input type="submit" class="btn btn-success" style="float: right;width: 100px;height: 35px;line-height: 10px;font-size: 15px;" value="开始预测"/>
+            </div>
+    </div>
+    </form>
+    </div>
+    </fieldset>
+    </div>
+    </div>
+{% endblock %}

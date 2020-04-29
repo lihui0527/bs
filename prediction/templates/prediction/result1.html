@@ -1,0 +1,179 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}考研预测分析系统-预测{% endblock %}
+{% block user_head_img %}
+    {% if user_name %}
+        {{ user_head_img }}
+    {% else %}
+        {% static 'images/user_head/no_one.ico' %}
+    {% endif %}
+{% endblock %}
+{% block head_pic_url %}{{ user_head_img }}{% endblock %}
+{% block user_name %}{{ user_name }}{% endblock %}{% block body %}
+<div class="container">
+<hr class="col-md-12 column">
+    <h3>
+        <span style="color: red;">&nbsp;|&nbsp;</span>{{ h3 }}
+        <a  href="/prediction/update/?id={{ user_id }}"><span style="color: red;">&nbsp;|&nbsp;</span>{{ update }}</a>
+    </h3>
+
+    <div class="{{ class }}">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4>
+            {{ title }}
+        </h4>
+        <strong>{{ mes }}</strong>
+    </div>
+    <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        电脑品牌
+                    </th>
+                    <th>
+                        电脑尺寸
+                    </th>
+                    <th>
+                        最喜欢的电脑颜色
+                    </th>
+                    <th>
+                        最常用的购买渠道
+                    </th>
+                    <th>
+                      主要用途
+                    </th>
+                    <th>
+                        在意的电脑配置
+                    </th>
+                    <th>
+                       购买笔记本的要素
+                    </th>
+                    <th>
+                       顾客收入
+                    </th>
+                    <th>
+                        顾客理想价格
+                    </th>
+                    <th>
+                        是否急用
+                    </th>
+                     <th>
+                        概率
+                    </th>
+                    <th>
+                        Result
+                    </th>
+                     <th>
+                        数据提交时间
+                    </th>
+                    <th>评价</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for data in user_data %}
+                <tr>
+                    <td>
+                        {% if data.computer_name == 1 %}
+                             联想
+                        {% elif  data.computer_name == 2 %}
+                            戴尔
+                        {% elif  data.computer_name == 3 %}
+                            惠普
+                        {% elif  data.computer_name == 4 %}
+                            华硕
+                        {% endif %}
+
+                    </td>
+                    <td>
+                        {% if data.computer_size == 1 %}
+                             18寸
+                        {% elif   data.computer_size  == 2 %}
+                            15-17寸
+
+                        {% endif %}
+
+                    </td>
+                    <td>
+                        {% if data.computer_color == 1 %}
+                             黑
+                        {% elif  data.computer_color == 2 %}
+                            白
+                        {% elif  data.computer_color == 3 %}
+                            灰
+
+                        {% endif %}
+
+                    </td>
+                    <td>
+                        {% if data.order_channel == 1 %}
+                             实体店
+                        {% elif data.order_channel == 2 %}
+                            电商
+                        {% endif %}
+
+                    </td>
+                    <td>
+                        {% if data.customer_will == 1 %}
+                        学习
+                        {% elif data.customer_will == 2 %}
+                        办公
+                        {% elif data.customer_will == 3 %}
+                            游戏
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if data.computer_configuration == 1 %}
+                        内存
+                        {% elif data.computer_configuration == 2 %}
+                            显卡
+                        {% endif %}
+
+                    </td>
+                    <td>
+                        {%  if data.order_factor == 1 %}
+                            价格品牌
+                        {%  elif data.order_factor == 2 %}
+                            外观配置
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{    data.customer_salary   }}
+                    </td>
+                    <td>
+                        {{   data.customer_cost   }}
+
+
+                    </td>
+                    <td>
+                        {% if data.urgent_need == 1  %}
+                            是
+                        {% else %}
+                            否
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ data.result }}
+                    </td>
+                    <td>
+                       {% if data.result >= 0.8  %}
+                           <span style="color:green;">可能买</span>
+                        {% else %}
+                            <span style="color:red;">不买</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ data.post_time }}
+                    </td>
+                <td>{{ data.verdict }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+<hr>
+
+{% if data_len %}
+    <span style="float: right;">共<strong style="color:green;">{{ data_len}}</strong>条数据</span>
+{% endif %}
+</div>
+{% endblock %}
