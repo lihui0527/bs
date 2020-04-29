@@ -8,7 +8,6 @@ from sklearn.externals import joblib
 from django.http import HttpResponseRedirect,HttpResponse
 from django.db.models import Avg, Max, Min, Count, Sum
 import socket
-host,port = "127.0.0.1",9999
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server.bind((host, port))
@@ -275,23 +274,12 @@ def prediction(req):
             while True:
                 user_data = models.PostData.objects.filter(id=data.id,user_id=user_id)
                 mesg = [computer_name, computer_size, computer_color, order_channel, customer_will, computer_configuration,order_factor, customer_salary, customer_cost, urgent_need]
-                server.listen(2)
-                print("server %s:%s runing..." % (host, port))
-                conn, addr = server.accept()
-                print("客户端-%s-连接！: " % str(addr))
-                text = str(data.id) + "," + str(user_id) + "," + ",".join([str(i) for i in mesg])
-                print("*" * 100)
-                print("发送数据：%s" % (text))
-                print("*" * 100)
-                conn.send(text.encode())
-                print("发送数据完成！")
-                #server.close()
+             
                 mesg = [computer_name, computer_size, computer_color, order_channel, customer_will, computer_configuration,
                     order_factor, customer_salary, customer_cost, urgent_need]
                 mesg = np.array(mesg).reshape(1, -1)
                 from sklearn.externals import joblib
-                import os
-                os.chdir("D:\sparkstreaming\postgraduate_prediction\prediction")
+             
                 log = joblib.load("logistic_regression1.m")
                 result = log.predict(mesg)[0]
                 models.PostData.objects.filter(id=data.id, user_id=user_id).update(result=result)
