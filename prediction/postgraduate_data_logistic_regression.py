@@ -11,11 +11,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix
 from sklearn.externals import joblib
 
-pd.set_option('display.max_columns',None)
-pd.set_option('display.max_rows',None)
-pd.set_option('expand_frame_repr',False)
-np.set_printoptions(threshold=np.inf)
-np.set_printoptions(linewidth=np.inf)
 
 dataset=pd.read_csv("./computer.csv")
 #提取出自变量数据
@@ -27,7 +22,7 @@ X=X[:,1:]
 #分成训练集和测试集
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
-#第二部分：创建并拟合回归器20190330
+#第二部分：创建并拟合回归器
 #1、利用训练集拟合回归器
 from sklearn.linear_model import LinearRegression
 regressor=LinearRegression()
