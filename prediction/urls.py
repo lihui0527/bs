@@ -1,11 +1,5 @@
 #-*- coding : utf-8 -*-
-# @--time--:2019/3/7-13:20
-# @--file_name--:urls.py
-# @--IED--:PyCharm
-# @--login_user--:hxp
-# @--author--:HXP
-# @--describe--:
-# @--note--:
+
 """django_online_exam_test URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
