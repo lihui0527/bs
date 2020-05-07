@@ -35,7 +35,7 @@ def do_register(req):
         password = req.POST.get("password")
         md5 = hashlib.md5()  # 2,获取md5() 方法
         md5.update(password.encode())  # 3. 对字符串的字节类型加密
-        password = md5.hexdigest()
+        password = md5.hexdigest()     ##十六进制
         head_file=req.FILES["head_file"]
         head_file_save_path="static/images/user_head/"+str(user_name)+"-"+str(time.time())+".jpg"
         user={"name":user_name,"password":password,"head_img":head_file_save_path,"register_time":datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
