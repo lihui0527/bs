@@ -7,10 +7,7 @@ import  numpy as np
 from sklearn.externals import joblib
 from django.http import HttpResponseRedirect,HttpResponse
 from django.db.models import Avg, Max, Min, Count, Sum
-import socket
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-server.bind((host, port))
+
 def index(req):
     if req.method == "GET":
         if req.session.get("user_id"):
